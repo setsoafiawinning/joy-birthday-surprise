@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Splash</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: radial-gradient(#fffafc, #ffe6f0);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #ff1493;
+      text-shadow: 2px 2px 10px #ff69b4;
+      animation: pulse 2s infinite;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 1.2em;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 12px #ffb6c1;
+      cursor: pointer;
+      animation: pulse 1.5s infinite;
+    }
+
+    #bubbleContainer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: 0;
+      font-size: 2em;
+      animation: riseUp 5s ease-out forwards;
+      filter: drop-shadow(0 0 6px #ffc0cb);
+    }
+
+    #message {
+      display: none;
+      margin-top: 40px;
+      font-size: 1.4em;
+      max-width: 700px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 12px;
+      padding: 20px;
+      color: #d6336c;
+      box-shadow: 0 0 10px #ff69b4;
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    @keyframes riseUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎂 Happy Birthday Miss Joy! 🎉</h1>
+  <button onclick="revealMessage()">Let’s Celebrate your day!</button>
+  <div id="bubbleContainer"></div>
+  <div id="message">
+    <strong>🎉 Happy Birthday, Joy(AKA tiny voice)! 🍰</strong><br><br>
+    You’ve officially leveled up but don’t worry, your legs stayed the same size tho😂😅<br>
+    And your voice? Still as adorably tiny as a baby!<br>
+    Seriously, if age had a height requirement, you'd still be waiting to celebrate another birthday😂<br>
+    have a great day short one! Wishing you joy(as your name implies) ykw..nwm because that’s way too big to fit in those cute little steps of yours💖
+  </div>
+
+  <audio id="birthdaySound" src="happy-birthday-house-373134.mp3" preload="auto"></audio>
+
+  <script>
+    const bubbleContainer = document.getElementById('bubbleContainer');
+    const emojis = ['🎂', '🎉', '🥳', '🍰', '💖', '✨', '🎈', '🍭','🙏🏿','💕','🌎','🌚','👅','🫀','💋','😍','😘','🥰','👏🏾','🫶🏿']
+    setInterval(() => {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      bubble.style.left = `${Math.random() * 100}%`;
+      bubble.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      bubbleContainer.appendChild(bubble);
+      setTimeout(() => bubble.remove(), 5000);
+    }, 150);
+
+    function revealMessage() {
+      document.getElementById('message').style.display = 'block';
+      const sound = document.getElementById('birthdaySound');
+      sound.play().catch(err => {
+        console.error("Audio playback failed:", err);
+        alert("Oops! Audio couldn't play. Try clicking again or check your browser settings.");
+      });
+    }
+  </script>
+</body>
+</html>
